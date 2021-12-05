@@ -135,8 +135,8 @@ class Board {
     //int diagTRCount = 0;
 
     for (ArrayPos pos : marked) {
-      int row = pos.x;
-      int col = pos.y;
+      int row = pos.row;
+      int col = pos.col;
       rowCounts[row]++;
       colCounts[col]++;
 /*
@@ -160,7 +160,7 @@ class Board {
 
   int scoreBoard() {
     for (ArrayPos pos : marked) {
-      board.get(pos.x).set(pos.y, 0);
+      board.get(pos.row).set(pos.col, 0);
     }
 
     int sum = 0;

@@ -1,10 +1,13 @@
-public class ArrayPos extends Pair<Integer, Integer> {
+public class ArrayPos {
+  int row;
+  int col;
   ArrayPos(Integer row, Integer col) {
-    super(row, col);
+    this.row = row;
+    this.col = col;
   }
 
   @Override
   public String toString() {
-    return "(Row: " + this.x + " Col: " + this.y + ")";
+    return "(Row: " + this.row + " Col: " + this.col + ")";
   }
 }
