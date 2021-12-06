@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class Pair<T, U> {
-  T one;
-  U two;
+  final T one;
+  final U two;
 
   public Pair(T one, U two) {
     this.one = one;

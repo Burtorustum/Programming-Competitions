@@ -80,8 +80,8 @@ public class Day4 extends AProblem {
 }
 
 class Board {
-  List<List<Integer>> board;
-  List<ArrayPos> marked;
+  final List<List<Integer>> board;
+  final List<ArrayPos> marked;
 
   public Board(String boardString) {
     this.board = new ArrayList<>();
@@ -127,21 +127,11 @@ class Board {
     int[] rowCounts = new int[5];
     int[] colCounts = new int[5];
 
-    //int diagTLCount = 0;
-    //int diagTRCount = 0;
-
     for (ArrayPos pos : marked) {
       int row = pos.row;
       int col = pos.col;
       rowCounts[row]++;
       colCounts[col]++;
-/*
-      if (row == col) {
-        diagTLCount++;
-      }
-      if (row == 4-col) {
-        diagTRCount++;
-      }*/
     }
 
     for (int i = 0; i < 5; i++) {

@@ -10,7 +10,7 @@ public class Day5 extends AProblem {
     super(fileName, "--- Day 5: Hydrothermal Venture ---");
   }
 
-  // WAY FASTER WITH ARRAY REPRESENTING POINTS LOL
+  // TODO WAY FASTER WITH ARRAY REPRESENTING POINTS LOL
 
   @Override
   String solvePartOne() {

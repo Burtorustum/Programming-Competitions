@@ -5,9 +5,12 @@ public class Point2D {
   final int x;
   final int y;
 
-  Point2D(List<Integer> ints) {
-    this.x = ints.get(0);
-    this.y = ints.get(1);
+  Point2D(List<Integer> pair) {
+    if (pair.size() != 2) {
+      throw new IllegalArgumentException("GIVEN LIST MUST ONLY CONTAIN 2 INTS (POINT2D)");
+    }
+    this.x = pair.get(0);
+    this.y = pair.get(1);
   }
 
   Point2D(int x, int y) {
