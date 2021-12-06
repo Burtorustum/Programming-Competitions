@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 public class Day5 extends AProblem {
 
   public Day5(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 5: Hydrothermal Venture ---");
   }
+
+  // WAY FASTER WITH ARRAY REPRESENTING POINTS LOL
 
   @Override
   String solvePartOne() {
@@ -68,8 +70,4 @@ public class Day5 extends AProblem {
     return count + "";
   }
 
-  @Override
-  String name() {
-    return "--- Day 5: Hydrothermal Venture ---";
-  }
 }

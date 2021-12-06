@@ -3,7 +3,7 @@ import java.io.IOException;
 public class Day2 extends AProblem {
 
   public Day2(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 2: Dive! ---");
   }
 
   @Override
@@ -50,8 +50,4 @@ public class Day2 extends AProblem {
     return (depth * horizontal) + "";
   }
 
-  @Override
-  String name() {
-    return "--- Day 2: Dive! ---";
-  }
 }

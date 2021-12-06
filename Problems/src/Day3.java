@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Day3 extends AProblem {
 
   public Day3(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 3: Binary Diagnostic ---");
   }
 
   @Override
@@ -88,11 +88,6 @@ public class Day3 extends AProblem {
     return (Integer.parseInt(oxygenAccepted.get(0), 2)
         * Integer.parseInt(co2Accepted.get(0), 2))
         + "";
-  }
-
-  @Override
-  String name() {
-    return "--- Day 3: Binary Diagnostic ---";
   }
 
   private record FilterPredicate(int position, char mostCommon) implements Predicate<String> {

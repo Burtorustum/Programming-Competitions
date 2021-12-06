@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Day6 extends AProblem {
 
   public Day6(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 6: Lanternfish ---");
   }
 
   @Override
@@ -60,8 +60,4 @@ public class Day6 extends AProblem {
     fishArr[8] = temp;
   }
 
-  @Override
-  String name() {
-    return "--- Day 6: Lanternfish ---";
-  }
 }

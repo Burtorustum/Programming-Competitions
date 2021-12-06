@@ -12,7 +12,7 @@ public class Day4 extends AProblem {
   Queue<Integer> draws;
 
   public Day4(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 4: Giant Squid ---");
 
     draws = Arrays.stream(lines.remove(0).split(","))
         .map(Integer::valueOf)
@@ -77,10 +77,6 @@ public class Day4 extends AProblem {
     return (score * remove) + "";
   }
 
-  @Override
-  String name() {
-    return "--- Day 4: Giant Squid ---";
-  }
 }
 
 class Board {

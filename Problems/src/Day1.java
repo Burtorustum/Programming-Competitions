@@ -3,7 +3,7 @@ import java.io.IOException;
 public class Day1 extends AProblem {
 
   public Day1(String fileName) throws IOException {
-    super(fileName);
+    super(fileName, "--- Day 1: Sonar Sweep ---");
   }
 
   @Override
@@ -42,8 +42,4 @@ public class Day1 extends AProblem {
     return count + "";
   }
 
-  @Override
-  String name() {
-    return "--- Day 1: Sonar Sweep ---";
-  }
 }
