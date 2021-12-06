@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day6 extends AProblem {
 
@@ -26,9 +27,7 @@ public class Day6 extends AProblem {
         .collect(Collectors.toList());
 
     BigInteger[] fishArr = new BigInteger[9];
-    for (int i = 0; i < 9; i++) {
-      fishArr[i] = new BigInteger("0");
-    }
+    Arrays.fill(fishArr, 0, 9, BigInteger.ZERO);
 
     for (int day : fish) {
       fishArr[day] = fishArr[day].add(new BigInteger("1"));
@@ -38,7 +37,8 @@ public class Day6 extends AProblem {
       iterate(fishArr);
     }
 
-    BigInteger count = new BigInteger("0");
+    BigInteger count = BigInteger.ZERO;
+
     for (BigInteger i : fishArr) {
       count = count.add(i);
     }
