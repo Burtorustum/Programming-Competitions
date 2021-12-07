@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AdventOfCode.2021/AdventOfCode.2021.iml" filepath="$PROJECT_DIR$/AdventOfCode.2021/AdventOfCode.2021.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProjectEuler.Java/ProjectEuler.Java.iml" filepath="$PROJECT_DIR$/ProjectEuler.Java/ProjectEuler.Java.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProjectEuler.Python/ProjectEuler.Python.iml" filepath="$PROJECT_DIR$/ProjectEuler.Python/ProjectEuler.Python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RandomProblems/RandomProblems.iml" filepath="$PROJECT_DIR$/RandomProblems/RandomProblems.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rosalind/Rosalind.iml" filepath="$PROJECT_DIR$/Rosalind/Rosalind.iml" />
       <module fileurl="file://$PROJECT_DIR$/Utility/Utility.iml" filepath="$PROJECT_DIR$/Utility/Utility.iml" />
     </modules>
   </component>
