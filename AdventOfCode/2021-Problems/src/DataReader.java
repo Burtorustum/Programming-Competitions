@@ -8,7 +8,7 @@ import java.util.List;
 public class DataReader {
 
   public static List<String> getLines(String fileName) throws IOException {
-    fileName = "Problems\\src\\data files\\" + fileName;
+    fileName = "AdventOfCode\\2021-Problems\\src\\data files\\" + fileName;
     Path path = Paths.get(fileName);
     return Files.readAllLines(path, StandardCharsets.UTF_8);
   }

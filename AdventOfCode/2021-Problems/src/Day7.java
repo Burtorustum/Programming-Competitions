@@ -40,7 +40,9 @@ public class Day7 extends AProblem {
 
       for (Integer pos : positions) {
         BigInteger diff = new BigInteger(Math.abs(i - pos) + "");
-        temp = temp.add((diff.multiply(diff.add(BigInteger.ONE))).divide(BigInteger.TWO));
+        temp = temp.add(
+            (diff.multiply(diff.add(BigInteger.ONE)))
+                .divide(BigInteger.TWO));
       }
 
       if (temp.compareTo(least) < 0) {
