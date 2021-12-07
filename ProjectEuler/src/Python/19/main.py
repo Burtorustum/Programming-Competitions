@@ -11,7 +11,7 @@ def main():
         day += 1
         name += 1
         if day > monthdays[month] and not (day == 28 and month == 1 and year % 4 == 0):
-            if month == 11:
+            if month == Python.11:
                 year += 1
             month = (month + 1) % 12
             day = 1

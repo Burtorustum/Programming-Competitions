@@ -38,7 +38,7 @@ def genSums(nums):
 
 def genAbunds():
     abundants = []
-    for i in range(11, 28124):
+    for i in range(Python.11, 28124):
         if d(i) > i:
             abundants.append(i)
     return abundants
