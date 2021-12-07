@@ -1,8 +1,9 @@
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day7 extends AProblem {
 
@@ -19,11 +20,10 @@ public class Day7 extends AProblem {
 
     int median = positions.get(positions.size()/2);
 
-    int count = 0;
-    for (Integer i : positions) {
-      count += Math.abs(i - median);
-    }
-    return count + "";
+    return positions.stream()
+        .map((p) -> Math.abs(p - median))
+        .reduce(0, Integer::sum)
+        .toString();
   }
 
   @Override
@@ -33,23 +33,15 @@ public class Day7 extends AProblem {
         .sorted(Integer::compareTo)
         .collect(Collectors.toList());
 
-    BigInteger least = new BigInteger("11111111111111111111111");
-
-    for (int i = 0; i < positions.stream().max(Integer::compareTo).get(); i++) {
-      BigInteger temp = BigInteger.ZERO;
-
-      for (Integer pos : positions) {
-        BigInteger diff = new BigInteger(Math.abs(i - pos) + "");
-        temp = temp.add(
-            (diff.multiply(diff.add(BigInteger.ONE)))
-                .divide(BigInteger.TWO));
-      }
-
-      if (temp.compareTo(least) < 0) {
-        least = temp;
-      }
-    }
-
-    return least.toString();
+    return Stream.iterate(0, (n) -> n + 1)   // stream of sequential ints
+    .limit(positions.get(positions.size() - 1))   // limit to max value in given positions
+    .map((Integer n) -> positions.stream()        // map each value generated
+        .map((Integer i) -> {                     // map each position to its cost w/ current converge point
+          int diff = Math.abs(n - i);
+          return (diff * (diff + 1)) / 2;
+        })
+        .reduce(Integer::sum).get())              // reduce to sum of costs for this convergence
+    .min(Integer::compareTo)                      // what is the minimum total cost
+    .toString();
   }
 }
