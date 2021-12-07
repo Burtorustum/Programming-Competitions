@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AdventOfCode/2020-Problems/AdventOfCode.2020.iml" filepath="$PROJECT_DIR$/AdventOfCode/2020-Problems/AdventOfCode.2020.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AdventOfCode/2021-Problems/AdventOfCode.2021.iml" filepath="$PROJECT_DIR$/AdventOfCode/2021-Problems/AdventOfCode.2021.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ProjectEuler/ProjectEuler.iml" filepath="$PROJECT_DIR$/ProjectEuler/ProjectEuler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AdventOfCode.2021/AdventOfCode.2021.iml" filepath="$PROJECT_DIR$/AdventOfCode.2021/AdventOfCode.2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjectEuler.Java/ProjectEuler.Java.iml" filepath="$PROJECT_DIR$/ProjectEuler.Java/ProjectEuler.Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjectEuler.Python/ProjectEuler.Python.iml" filepath="$PROJECT_DIR$/ProjectEuler.Python/ProjectEuler.Python.iml" />
       <module fileurl="file://$PROJECT_DIR$/Utility/Utility.iml" filepath="$PROJECT_DIR$/Utility/Utility.iml" />
     </modules>
   </component>

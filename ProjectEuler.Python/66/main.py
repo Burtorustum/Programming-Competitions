@@ -8,7 +8,7 @@ def main():
         #y = min_solution_convergent(d)
         y = min_solution(d, curmax)
         if y > curmax:
-            min_solution
+            #min_solution
             curmax = y
             D = d
         print(d)

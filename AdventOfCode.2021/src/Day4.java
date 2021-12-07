@@ -116,7 +116,7 @@ class Board {
 
   public void markNum(int n) {
     Optional<ArrayPos> posOptional = findNum(n);
-    posOptional.ifPresent(arrayPos -> this.marked.add(arrayPos));
+    posOptional.ifPresent(this.marked::add);
   }
 
   public boolean hasNotWon() {

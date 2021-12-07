@@ -4,7 +4,7 @@ def main():
 
 def pathfind(grid):
     running = True
-    while running:
+    #while running:
 
 
 if __name__ == '__main__':

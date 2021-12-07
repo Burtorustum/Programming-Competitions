@@ -41,7 +41,7 @@ public class Day7 extends AProblem {
           return (diff * (diff + 1)) / 2;
         })
         .reduce(Integer::sum).get())              // reduce to sum of costs for this convergence
-    .min(Integer::compareTo)                      // what is the minimum total cost
-    .toString();
+        .min(Integer::compareTo)                      // what is the minimum total cost
+        .get().toString();
   }
 }
