@@ -1,8 +1,7 @@
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 public class Day6 extends AProblem {
 
@@ -21,16 +20,12 @@ public class Day6 extends AProblem {
   }
 
   private BigInteger solve(int numDays) {
-    List<Integer> fish = Arrays.stream(lines.get(0).split(","))
-        .map(Integer::valueOf)
-        .collect(Collectors.toList());
-
     BigInteger[] fishArr = new BigInteger[9];
     Arrays.fill(fishArr, 0, 9, BigInteger.ZERO);
 
-    for (int day : fish) {
-      fishArr[day] = fishArr[day].add(new BigInteger("1"));
-    }
+    Arrays.stream(lines.get(0).split(","))
+        .map(BigInteger::new)
+        .forEach(new ConsumeFish(fishArr));
 
     for (int day = 1; day <= numDays; day++) {
       iterate(fishArr);
@@ -57,6 +52,13 @@ public class Day6 extends AProblem {
     fishArr[6] = fishArr[7].add(temp);
     fishArr[7] = fishArr[8];
     fishArr[8] = temp;
+  }
+
+  private record ConsumeFish(BigInteger[] arr) implements Consumer<BigInteger> {
+    @Override
+    public void accept(BigInteger bigInteger) {
+      arr[bigInteger.intValue()] = arr[bigInteger.intValue()].add(BigInteger.ONE);
+    }
   }
 
 }

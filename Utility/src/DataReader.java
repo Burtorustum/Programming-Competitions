@@ -7,11 +7,9 @@ import java.util.List;
 
 public class DataReader {
 
-  public List<String> lines;
-
-  public DataReader(String fileName) throws IOException {
+  public static List<String> getLines(String fileName) throws IOException {
     fileName = "Problems\\src\\data files\\" + fileName;
     Path path = Paths.get(fileName);
-    this.lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+    return Files.readAllLines(path, StandardCharsets.UTF_8);
   }
 }

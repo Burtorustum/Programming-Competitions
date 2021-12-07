@@ -4,10 +4,10 @@ import java.util.List;
 public abstract class AProblem {
   protected final String filename;
   protected final String day;
-  protected List<String> lines;
+  protected final List<String> lines;
 
   public AProblem(String fileName, String day) throws IOException {
-    lines = new DataReader(fileName).lines;
+    lines = DataReader.getLines(fileName);
     this.filename = fileName;
     this.day = day;
   }

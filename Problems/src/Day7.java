@@ -8,11 +8,15 @@ public class Day7 extends AProblem {
 
   @Override
   String solvePartOne() {
+
+
     return null;
   }
 
   @Override
   String solvePartTwo() {
+
+
     return null;
   }
 
