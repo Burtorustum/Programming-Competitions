@@ -16,7 +16,7 @@ public class Problem123 {
         return n + "";
       }
 
-      n++;
+      n+=2;
     }
   }
 

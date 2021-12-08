@@ -15,9 +15,12 @@ public class Runner {
     problems.add(new Day6(nameFile(6)));
     problems.add(new Day7("data7test.txt"));
     problems.add(new Day7(nameFile(7)));
-    */
     problems.add(new Day8("data8test.txt"));
     problems.add(new Day8(nameFile(8)));
+    */
+    problems.add(new Day9("data9test.txt"));
+    problems.add(new Day9(nameFile(9)));
+
 
 
     for (AProblem p : problems) {
