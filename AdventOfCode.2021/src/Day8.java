@@ -123,6 +123,7 @@ public class Day8 extends AProblem {
         int max = -1;
 
 
+        // TODO this is all so dumb why didnt I sort the strings
         for (int x = 0; x < 10; x++) {
           boolean accept = true;
           for (char c: entryChars) {
