@@ -11,21 +11,21 @@ public class Day9 extends AProblem {
 
   @Override
   String solvePartOne() {
-    ArrayList<ArrayList<Integer>> hmap = new ArrayList<>();
-    getInput(hmap);
+    ArrayList<ArrayList<Integer>> hMap = new ArrayList<>();
+    getInput(hMap);
 
     int riskSum = 0;
 
-    for (int row = 0; row < hmap.size(); row++) {
-      for (int col = 0; col < hmap.get(row).size(); col++) {
+    for (int row = 0; row < hMap.size(); row++) {
+      for (int col = 0; col < hMap.get(row).size(); col++) {
 
-        boolean right = checkRight(hmap, row, col);
-        boolean left = checkLeft(hmap, row, col);
-        boolean up = checkUp(hmap, row, col);
-        boolean down = checkDown(hmap, row, col);
+        boolean right = checkRight(hMap, row, col);
+        boolean left = checkLeft(hMap, row, col);
+        boolean up = checkUp(hMap, row, col);
+        boolean down = checkDown(hMap, row, col);
 
         if (right && left && up && down) {
-          riskSum += hmap.get(row).get(col) + 1;
+          riskSum += hMap.get(row).get(col) + 1;
         }
       }
     }
@@ -35,54 +35,63 @@ public class Day9 extends AProblem {
 
   @Override
   String solvePartTwo() {
-    ArrayList<ArrayList<Integer>> hmap = new ArrayList<>();
-    getInput(hmap);
+    ArrayList<ArrayList<Integer>> hMap = new ArrayList<>();
+    getInput(hMap);
 
     List<Integer> basinSizes = new ArrayList<>();
 
-    for (int row = 0; row < hmap.size(); row++) {
-      for (int col = 0; col < hmap.get(row).size(); col++) {
+    for (int row = 0; row < hMap.size(); row++) {
+      for (int col = 0; col < hMap.get(row).size(); col++) {
 
-        boolean right = checkRight(hmap, row, col);
-        boolean left = checkLeft(hmap, row, col);
-        boolean up = checkUp(hmap, row, col);
-        boolean down = checkDown(hmap, row, col);
+        boolean right = checkRight(hMap, row, col);
+        boolean left  = checkLeft(hMap, row, col);
+        boolean up    = checkUp(hMap, row, col);
+        boolean down  = checkDown(hMap, row, col);
 
         if (right && left && up && down) {
-          int curRow = row;
-          int curCol = col;
 
           HashSet<ArrayPos> basin = new HashSet<>();
-          basin.add(new ArrayPos(curRow, curCol));
+          basin.add(new ArrayPos(row, col));
 
           List<ArrayPos> toEvaluate = new ArrayList<>();
-          toEvaluate.add(new ArrayPos(curRow, curCol));
+          toEvaluate.add(new ArrayPos(row, col));
 
           while (!toEvaluate.isEmpty()) {
             ArrayPos pos = toEvaluate.remove(0);
-            curRow = pos.row;
-            curCol = pos.col;
 
-            if (checkRightBasin(hmap, curRow, curCol) && !basin.contains(new ArrayPos(curRow, curCol+1))) {
-                basin.add(new ArrayPos(curRow, curCol+1));
-                toEvaluate.add(new ArrayPos(curRow, curCol+1));
+            boolean addRight = checkRightBasin(hMap, pos.row, pos.col)
+                && !basin.contains(new ArrayPos(pos.row, pos.col + 1));
+
+            boolean addLeft = checkLeftBasin(hMap, pos.row, pos.col)
+                && !basin.contains(new ArrayPos(pos.row, pos.col - 1));
+
+            boolean addUp = checkUpBasin(hMap, pos.row, pos.col)
+                && !basin.contains(new ArrayPos(pos.row - 1, pos.col));
+
+            boolean addDown = checkDownBasin(hMap, pos.row, pos.col)
+                && !basin.contains(new ArrayPos(pos.row + 1, pos.col));
+
+            if (addRight) {
+              basin.add(new ArrayPos(pos.row, pos.col + 1));
+              toEvaluate.add(new ArrayPos(pos.row, pos.col + 1));
             }
 
-            if (checkLeftBasin(hmap, curRow, curCol) && !basin.contains(new ArrayPos(curRow, curCol-1))) {
-                basin.add(new ArrayPos(curRow, curCol-1));
-                toEvaluate.add(new ArrayPos(curRow, curCol-1));
-              }
+            if (addLeft) {
+              basin.add(new ArrayPos(pos.row, pos.col - 1));
+              toEvaluate.add(new ArrayPos(pos.row, pos.col - 1));
+            }
 
-            if (checkUpBasin(hmap, curRow, curCol) && !basin.contains(new ArrayPos(curRow-1, curCol))) {
-                basin.add(new ArrayPos(curRow-1, curCol));
-                toEvaluate.add(new ArrayPos(curRow-1, curCol));
-              }
+            if (addUp) {
+              basin.add(new ArrayPos(pos.row - 1, pos.col));
+              toEvaluate.add(new ArrayPos(pos.row - 1, pos.col));
+            }
 
-            if (checkDownBasin(hmap, curRow, curCol) && !basin.contains(new ArrayPos(curRow+1, curCol))) {
-                basin.add(new ArrayPos(curRow+1, curCol));
-                toEvaluate.add(new ArrayPos(curRow+1, curCol));
+            if (addDown) {
+              basin.add(new ArrayPos(pos.row + 1, pos.col));
+              toEvaluate.add(new ArrayPos(pos.row + 1, pos.col));
             }
           }
+
           basinSizes.add(basin.size());
         }
       }
@@ -99,7 +108,7 @@ public class Day9 extends AProblem {
     for (String line : lines) {
       ArrayList<Integer> row = new ArrayList<>();
       for (int i = 0; i < line.length(); i++) {
-        row.add(Integer.parseInt(line.substring(i, i+1)));
+        row.add(Integer.parseInt(line.substring(i, i + 1)));
       }
       map.add(row);
     }
