@@ -1,13 +1,11 @@
 import java.util.Objects;
 
-public class Pair<T, U> {
-  final T one;
-  final U two;
+public record Pair<T, U> (T one, U two) {
 
-  public Pair(T one, U two) {
-    this.one = one;
-    this.two = two;
+  public boolean contains(Object item) {
+    return item.equals(one) || item.equals(two);
   }
+
 
   @Override
   public boolean equals(Object o) {

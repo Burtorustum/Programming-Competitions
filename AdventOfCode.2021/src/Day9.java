@@ -6,7 +6,7 @@ import java.util.List;
 public class Day9 extends AProblem {
 
   public Day9(String fileName) throws IOException {
-    super(fileName, "--- 9 ---");
+    super(fileName, "--- Day 9: Smoke Basin ---\n");
   }
 
   @Override
