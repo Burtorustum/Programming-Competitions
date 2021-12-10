@@ -58,7 +58,9 @@ public class Node<T> {
    * @param weight Weight of edge between the two nodes
    */
   public void connect(Node<T> other, int weight) {
-    this.edgeList.add(new Edge<T>(weight, this, other));
+    if (this.edgeList.stream().noneMatch(e -> e.nodeA().equals(other) || e.nodeB().equals(other))) {
+      this.edgeList.add(new Edge<T>(weight, this, other));
+    }
   }
 
   public void connect(Node<T> other) {
@@ -88,15 +90,14 @@ public class Node<T> {
 
     if (o instanceof Node<?>) {
       return ((Node<?>) o).getData().equals(this.data)
-          && ((Node<?>) o).getEdgeList().equals(this.edgeList)
-          && ((Node<?>) o).isMarked() == (this.marked);
+          && ((Node<?>) o).getEdgeList().equals(this.edgeList);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, edgeList, marked);
+    return Objects.hash(data, edgeList);
   }
 
   @Override
@@ -104,7 +105,6 @@ public class Node<T> {
     return "Node{" +
         "data=" + data +
         ", connects to: [" + edgeList.stream().map(e -> e.getOther(this).getData() + "").reduce((a, b) -> a + " " + b).orElse("") +
-        "], marked= " + marked +
-        '}';
+        "]}";
   }
 }

@@ -25,35 +25,29 @@ public class TestGraph {
     Graph<Integer> graph = new Graph<>();
     Node<Integer> targetNode = new Node<>(20);
 
-    graph.addNode(new Node<>(0));
     graph.addNode(targetNode);
 
     for (Node<Integer> n : nodes) {
       graph.addNode(n);
     }
 
-    graph.addEdge(graph.nodes.get(0), targetNode, 1);
-    graph.addEdge(graph.nodes.get(0), graph.nodes.get(2), 1);
+    graph.addTwoWayEdge(graph.nodes.get(1), targetNode, 10);
+    graph.addTwoWayEdge(graph.nodes.get(1), graph.nodes.get(4), 1);
+    graph.addTwoWayEdge(graph.nodes.get(4), targetNode, 1);
 
-    /*graph.addEdge(nodes.get(4), nodes.get(0), 200);
-    graph.addEdge(nodes.get(7), nodes.get(19), 200);
-    graph.addEdge(nodes.get(13), nodes.get(15), 74);
-    graph.addEdge(nodes.get(1), nodes.get(2), 13);
-    graph.addEdge(nodes.get(0), nodes.get(8), 12);
-    graph.addEdge(nodes.get(17), nodes.get(0), 84);*/
+    graph.minPath(nodes.get(0), targetNode);
+    System.out.println(graph.nodes.stream().map(Node::isMarked).collect(Collectors.toList()));
 
+    //Node<Integer> BFSout = graph.DFSorBFS(targetNode.getData(), false);
+    //System.out.println("BFS Result: " + BFSout);
+    //System.out.println(graph);
 
+    //graph.unmarkAll();
+    //System.out.println("--------\n");
 
-    Node<Integer> BFSout = graph.DFSorBFS(targetNode.getData(), false);
-    System.out.println("BFS Result: " + BFSout);
-    System.out.println(graph);
-
-    graph.unmarkAll();
-    System.out.println("--------\n");
-
-    Node<Integer> DFSout = graph.DFSorBFS(targetNode.getData(), true);
-    System.out.println("DFS Result: " + DFSout);
-    System.out.println(graph);
+    //Node<Integer> DFSout = graph.DFSorBFS(targetNode.getData(), true);
+    //System.out.println("DFS Result: " + DFSout);
+    //System.out.println(graph);
 
   }
 }

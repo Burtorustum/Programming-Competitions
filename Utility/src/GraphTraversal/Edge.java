@@ -19,15 +19,21 @@ public record Edge<T>(int weight, Node<T> nodeA, Node<T> nodeB) {
     return n.equals(nodeA) || n.equals(nodeB);
   }
 
-  // TODO this sucks but w/e?
+  // this sucks but w/e. Since nodes handle edge gen this can work fine
   @Override
   public boolean equals(Object o) {
-    return this == o;
+    if (o == this) {
+      return true;
+    }
+    if (! (o instanceof Edge<?>)) {
+      return false;
+    }
+    return o.toString().equals(this.toString());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(weight, nodeA, nodeB);
+    return Objects.hash(this.toString());
   }
 
   @Override

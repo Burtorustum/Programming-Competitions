@@ -1,7 +1,10 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Graph<T> {
   final List<Node<T>> nodes;
@@ -12,25 +15,28 @@ public class Graph<T> {
 
   public void addNode(Node<T> n) {
     if (this.nodes.contains(n)) {
-      throw new IllegalArgumentException("give node already in graph");
+      throw new IllegalArgumentException("given node already in graph");
     }
     this.nodes.add(n);
   }
 
-  public void addEdge(Node<T> a, Node<T> b, int weight) {
+  public void addTwoWayEdge(Node<T> a, Node<T> b, int weight) {
     if (!this.nodes.contains(a) || !this.nodes.contains(b)) {
       throw new IllegalArgumentException("A or B not in this graph");
     }
     a.connectTwoWay(b, weight);
   }
 
+  public void addEdge(Node<T> start, Node<T> end, int weight) {
+    if (!this.nodes.contains(start) || !this.nodes.contains(end)) {
+      throw new IllegalArgumentException("A or B not in this graph");
+    }
+    start.connect(end, weight);
+  }
+
   public void unmarkAll() {
     this.nodes.forEach(Node::unmark);
   }
-
-  //public Node<T> randomSearch(T target) {}
-
-  //public enum DFSOrder {PRE, REV_PRE, POST, REV_POST}
 
   public Node<T> DFSorBFS(T target, boolean DFS) {
     Deque<Node<T>> toExplore = new ArrayDeque<>();
@@ -67,11 +73,80 @@ public class Graph<T> {
       }
     }
 
-    return null;
+    return null; // If the data doesn't exist in this graph
   }
 
+  public List<Node<T>> minPath(Node<T> source, Node<T> target) {
 
-  //public List<Node<T>> minPath(Node<T> source, Node<T> target) {}
+    if (!this.nodes.contains(source) || !this.nodes.contains(target)) {
+      throw new IllegalArgumentException("Given source or target is not in graph");
+    }
+
+    HashMap<Node<T>, Integer> dist = new HashMap<>();
+    HashMap<Node<T>, Node<T>> prev = new HashMap<>();
+
+    Comparator<Node<T>> comparator = new MinCompare(dist);
+    PriorityQueue<Node<T>> searchQueue = new PriorityQueue<>(comparator);
+
+    for (Node<T> n : this.nodes) {
+      dist.put(n, Integer.MAX_VALUE);
+    }
+
+    dist.put(source, 0);
+    searchQueue.add(source);
+    source.mark();
+
+    while (!searchQueue.isEmpty()) {
+      Node<T> root = searchQueue.remove();
+
+      // we only need to fine ONE of the shortest paths
+      if (root.equals(target)) {
+        break;
+      }
+
+      for (Edge<T> outEdge : root.getEdgeList()) {
+
+        int alt = dist.get(root) + outEdge.weight();
+        Node<T> adj = outEdge.getOther(root);
+
+        if (alt <= dist.get(adj)) {
+          dist.put(adj, alt);
+          prev.put(adj, root);
+
+          if (!adj.isMarked()) {
+            searchQueue.add(adj);
+            adj.mark();
+          }
+        }
+      }
+    }
+    List<Node<T>> path = new ArrayList<>();
+
+    System.out.println("SOURCE: " + source);
+    System.out.println("TARGET: " + target);
+
+    while (target != null) {
+      path.add(target);
+      target = prev.get(target);
+    }
+
+
+    System.out.println("PATH: " + path);
+    return path;
+  }
+
+  private class MinCompare implements Comparator<Node<T>> {
+    private final HashMap<Node<T>, Integer> dist;
+
+    public MinCompare(HashMap<Node<T>, Integer> dist) {
+      this.dist = dist;
+    }
+
+    @Override
+    public int compare(Node<T> o1, Node<T> o2) {
+      return dist.get(o1) - dist.get(o2);
+    }
+  }
 
   @Override
   public String toString() {
