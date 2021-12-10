@@ -43,10 +43,10 @@ public class Day10 extends AProblem {
     int sum = 0;
 
     for (Character c : corruptions) {
-      if (c == ')') sum += 3;
-      else if (c == ']') sum += 57;
-      else if (c == '}') sum += 1197;
-      else sum += 25137;
+      if      (c == ')')  sum += 3;
+      else if (c == ']')  sum += 57;
+      else if (c == '}')  sum += 1197;
+      else                sum += 25137;
     }
 
     return "" + sum;
@@ -95,16 +95,15 @@ public class Day10 extends AProblem {
       while (!stack.empty()) {
         char c = chunkLimits.get(stack.pop());
 
-        if (c == ')') total = total.multiply(FIVE).add(new BigInteger("1"));
-        else if (c == ']') total = total.multiply(FIVE).add(new BigInteger("2"));
-        else if (c == '}') total = total.multiply(FIVE).add(new BigInteger("3"));
-        else total = total.multiply(FIVE).add(new BigInteger("4"));
+        if      (c == ')') total    = total.multiply(FIVE).add(new BigInteger("1"));
+        else if (c == ']') total    = total.multiply(FIVE).add(new BigInteger("2"));
+        else if (c == '}') total    = total.multiply(FIVE).add(new BigInteger("3"));
+        else total                  = total.multiply(FIVE).add(new BigInteger("4"));
       }
       results.add(total);
     }
 
     results.sort(BigInteger::compareTo);
-
     return results.get(results.size() / 2).toString();
   }
 }
