@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Day11 extends AProblem {
 
   public Day11(String fileName) throws IOException {
-    super(fileName, "--- Day 11: Dumbo Octopus ---\n");
+    super(fileName, "--- Day 11: Dumbo Octopus ---");
   }
 
   @Override
