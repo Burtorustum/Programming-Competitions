@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ArrayPos {
@@ -7,6 +9,28 @@ public class ArrayPos {
   ArrayPos(Integer row, Integer col) {
     this.row = row;
     this.col = col;
+  }
+
+  /**
+   *
+   * @param numRows the total number of rows (array.length())
+   * @param numCols the total number of cols (array[row].length())
+   * @param includeDiagonals whether to include diagonal adjacent positions
+   * @return A list of all valid adjacent ArrayPos to this one
+   */
+  public List<ArrayPos> getAdjacent(int numRows, int numCols, boolean includeDiagonals) {
+    List<ArrayPos> adj = new ArrayList<>();
+    adj.add(getLeft());
+    adj.add(getRight(numCols));
+    adj.add(getDown(numRows));
+    adj.add(getUp());
+    if (includeDiagonals) {
+      adj.add(getLD(numRows));
+      adj.add(getLU());
+      adj.add(getRD(numRows, numCols));
+      adj.add(getRU(numCols));
+    }
+    return adj;
   }
 
   ArrayPos getLeft() {

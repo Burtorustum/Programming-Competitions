@@ -144,7 +144,8 @@ public class Day11 extends AProblem {
       }
     }
 
-    for (int i = 0; i < 1000; i++) {
+    int i = 0;
+    while (true) {
       if (grid.stream().allMatch(row -> row.stream().allMatch(n -> n == 0))) {
         return i + "";
       }
@@ -185,8 +186,7 @@ public class Day11 extends AProblem {
           .map(row -> row.stream().map(n -> n <= 0 ? 0 : n)
               .collect(Collectors.toList()))
           .collect(Collectors.toList());
+      i++;
     }
-
-    return "";
   }
 }
