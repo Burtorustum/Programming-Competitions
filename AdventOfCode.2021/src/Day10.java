@@ -52,8 +52,6 @@ public class Day10 extends AProblem {
     return "" + sum;
   }
 
-
-
   @Override
   String solvePartTwo() {
 
