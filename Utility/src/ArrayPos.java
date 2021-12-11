@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ArrayPos {
   final int row;
@@ -18,8 +19,9 @@ public class ArrayPos {
    * @param includeDiagonals whether to include diagonal adjacent positions
    * @return A list of all valid adjacent ArrayPos to this one
    */
-  public List<ArrayPos> getAdjacent(int numRows, int numCols, boolean includeDiagonals) {
+  public List<ArrayPos> getAdjacent(int numRows, int numCols, boolean includeDiagonals, boolean includeCur) {
     List<ArrayPos> adj = new ArrayList<>();
+
     adj.add(getLeft());
     adj.add(getRight(numCols));
     adj.add(getDown(numRows));
@@ -30,7 +32,22 @@ public class ArrayPos {
       adj.add(getRD(numRows, numCols));
       adj.add(getRU(numCols));
     }
+    if (includeCur) {
+      adj.add(this);
+    }
+
     return adj;
+  }
+
+  public <T> List<T> getAdjacent(List<List<T>> grid, boolean includeDiagonals, boolean includeCur) {
+    List<ArrayPos> adj = new ArrayList<>();
+    int numRows = grid.size();
+    int numCols = grid.get(this.row).size();
+
+    return this.getAdjacent(numRows, numCols, includeDiagonals, includeCur)
+        .stream()
+        .map(pos -> grid.get(pos.row).get(pos.col))
+        .toList();
   }
 
   ArrayPos getLeft() {
