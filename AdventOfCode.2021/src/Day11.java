@@ -49,10 +49,7 @@ public class Day11 extends AProblem {
   }
 
   boolean canFlash(List<List<Integer>> grid) {
-    return grid.stream()
-        .map(row->row.stream().anyMatch(n -> n > 9))
-        .reduce((b1, b2) -> b1 || b2)
-        .get();
+    return grid.stream().anyMatch(row->row.stream().anyMatch(n -> n > 9));
   }
 
   public List<List<Integer>> iterate(List<List<Integer>> grid, AtomicInteger numFlashes) {
