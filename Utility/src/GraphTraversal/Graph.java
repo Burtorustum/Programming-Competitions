@@ -3,8 +3,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 public class Graph<T> {
   final List<Node<T>> nodes;
@@ -76,39 +78,7 @@ public class Graph<T> {
     return null; // If the data doesn't exist in this graph
   }
 
-  public int numPathsDFSProb12(Node<String> src, String target) {
-    Deque<Node<String>> toExplore = new ArrayDeque<>();
-    toExplore.push(src);
-    src.mark();
-
-    int i = 0;
-    while (!toExplore.isEmpty()) {
-
-      Node<String> cur = toExplore.pop();
-      if (cur.getData().equals(target)) {
-        cur.mark();
-        continue;
-      }
-
-      if (cur.neighbors().stream().map(Node::getData).anyMatch(s -> s.equals(target))) {
-        System.out.println(cur);
-        i++;
-      }
-
-      for (Node<String> adj : cur.neighbors()) {
-        if (!adj.isMarked()) {
-          if (!Character.isUpperCase(adj.getData().charAt(0))) {
-            adj.mark();
-          }
-          toExplore.push(adj);
-        }
-      }
-    }
-
-    return i;
-  }
-
-  public void numPathsProb122(Node<String> src, String target, List<Node<String>> curPath, List<List<Node<String>>> allPaths) {
+  public void aocProblem12A(Node<String> src, String target, List<Node<String>> curPath, List<List<Node<String>>> allPaths) {
     if (src.isMarked()) {
       return;
     }
@@ -124,8 +94,44 @@ public class Graph<T> {
       return;
     }
     for (Node<String> adj : src.neighbors()) {
-      numPathsProb122(adj, target, curPath, allPaths);
+      aocProblem12A(adj, target, curPath, allPaths);
     }
+    curPath.remove(curPath.size()-1);
+    src.unmark();
+  }
+
+  public void aocProblem12B(Node<String> src, String target, List<Node<String>> curPath, List<List<Node<String>>> allPaths, boolean prevUnmarked) {
+    if (src.isMarked()) {
+      return;
+    }
+
+    if (!Character.isUpperCase(src.getData().charAt(0))) {
+      src.mark();
+    }
+
+    curPath.add(src);
+
+    if (src.getData().equals(target)) {
+      allPaths.add(new ArrayList<>(curPath));
+      src.unmark();
+      curPath.remove(curPath.size()-1);
+      return;
+    }
+
+    for (Node<String> adj : src.neighbors()) {
+      aocProblem12B(adj, target, curPath, allPaths, prevUnmarked);
+    }
+
+    if (!Character.isUpperCase(src.getData().charAt(0))
+        && !src.getData().equals("start")
+        && !prevUnmarked)
+    {
+      src.unmark();
+      for (Node<String> adj : src.neighbors()) {
+        aocProblem12B(adj, target, curPath, allPaths, true);
+      }
+    }
+
     curPath.remove(curPath.size()-1);
     src.unmark();
   }
