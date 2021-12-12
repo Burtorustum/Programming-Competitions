@@ -38,15 +38,15 @@ public class Graph<T> {
     this.nodes.forEach(Node::unmark);
   }
 
-  public Node<T> DFSorBFS(T target, boolean DFS) {
+  public Node<T> DFSorBFS(Node<T> src, T target, boolean DFS) {
     Deque<Node<T>> toExplore = new ArrayDeque<>();
 
     if (DFS) {
-      toExplore.push(nodes.get(0));
+      toExplore.push(src);
     } else {
-      toExplore.add(nodes.get(0));
+      toExplore.add(src);
     }
-    nodes.get(0).mark();
+    src.mark();
 
     while (!toExplore.isEmpty()) {
       Node<T> cur;
@@ -74,6 +74,60 @@ public class Graph<T> {
     }
 
     return null; // If the data doesn't exist in this graph
+  }
+
+  public int numPathsDFSProb12(Node<String> src, String target) {
+    Deque<Node<String>> toExplore = new ArrayDeque<>();
+    toExplore.push(src);
+    src.mark();
+
+    int i = 0;
+    while (!toExplore.isEmpty()) {
+
+      Node<String> cur = toExplore.pop();
+      if (cur.getData().equals(target)) {
+        cur.mark();
+        continue;
+      }
+
+      if (cur.neighbors().stream().map(Node::getData).anyMatch(s -> s.equals(target))) {
+        System.out.println(cur);
+        i++;
+      }
+
+      for (Node<String> adj : cur.neighbors()) {
+        if (!adj.isMarked()) {
+          if (!Character.isUpperCase(adj.getData().charAt(0))) {
+            adj.mark();
+          }
+          toExplore.push(adj);
+        }
+      }
+    }
+
+    return i;
+  }
+
+  public void numPathsProb122(Node<String> src, String target, List<Node<String>> curPath, List<List<Node<String>>> allPaths) {
+    if (src.isMarked()) {
+      return;
+    }
+    if (!Character.isUpperCase(src.getData().charAt(0))) {
+      src.mark();
+    }
+    curPath.add(src);
+
+    if (src.getData().equals(target)) {
+      allPaths.add(new ArrayList<>(curPath));
+      src.unmark();
+      curPath.remove(curPath.size()-1);
+      return;
+    }
+    for (Node<String> adj : src.neighbors()) {
+      numPathsProb122(adj, target, curPath, allPaths);
+    }
+    curPath.remove(curPath.size()-1);
+    src.unmark();
   }
 
   public List<Node<T>> minPath(Node<T> source, Node<T> target) {
