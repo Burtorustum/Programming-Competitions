@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Day12 extends AProblem {
 
   public Day12(String fileName) throws IOException {
-    super(fileName, "--- 12 ---");
+    super(fileName, "--- Day 12: Passage Pathing ---");
   }
 
   @Override

@@ -93,10 +93,10 @@ public class Day10 extends AProblem {
       while (!stack.empty()) {
         char c = chunkLimits.get(stack.pop());
 
-        if      (c == ')') total    = total.multiply(FIVE).add(new BigInteger("1"));
-        else if (c == ']') total    = total.multiply(FIVE).add(new BigInteger("2"));
-        else if (c == '}') total    = total.multiply(FIVE).add(new BigInteger("3"));
-        else total                  = total.multiply(FIVE).add(new BigInteger("4"));
+        if      (c == ')') total = total.multiply(FIVE).add(new BigInteger("1"));
+        else if (c == ']') total = total.multiply(FIVE).add(new BigInteger("2"));
+        else if (c == '}') total = total.multiply(FIVE).add(new BigInteger("3"));
+        else               total = total.multiply(FIVE).add(new BigInteger("4"));
       }
       results.add(total);
     }
