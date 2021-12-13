@@ -15,25 +15,25 @@ public class Day13 extends AProblem {
   @Override
   String solvePartOne() {
     Set<Point2D> points = getStartPos();
-
     List<String> folds = lines.stream().filter(s -> s.length() > 0 && s.charAt(0) == 'f').toList();
+
     String fold = folds.get(0);
     fold = fold.substring("fold along ".length());
-
     points = applyFold(points, fold);
+
     return "" + points.size();
   }
 
   @Override
   String solvePartTwo() {
     Set<Point2D> points = getStartPos();
-
     List<String> folds = lines.stream().filter(s -> s.length() > 0 && s.charAt(0) == 'f').toList();
 
     for (String f : folds) {
       f = f.substring("fold along ".length());
       points = applyFold(points, f);
     }
+
     return printPoints(points);
   }
 
@@ -77,7 +77,7 @@ public class Day13 extends AProblem {
         str.append(b ? "# " : " .");
       }
     }
-    String s = str.toString().replaceAll("\\.", " ");
-    return s;
+
+    return str.toString().replaceAll("\\.", " ");
   }
 }
