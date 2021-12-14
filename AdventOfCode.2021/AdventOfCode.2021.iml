@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Utility" />
+    <orderEntry type="library" name="ejml.all" level="project" />
   </component>
 </module>
