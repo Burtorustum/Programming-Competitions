@@ -3,10 +3,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 public class Graph<T> {
   final List<Node<T>> nodes;
@@ -76,6 +74,28 @@ public class Graph<T> {
     }
 
     return null; // If the data doesn't exist in this graph
+  }
+
+  public int numPathsBFS(Node<T> src, T target) {
+    if (src.isMarked()) {
+      return 0;
+    }
+
+    src.mark();
+
+    if (src.getData().equals(target)) {
+      System.out.println("ARRIVED");
+      src.unmark();
+      return 1;
+    }
+
+    int below = 0;
+    for (Node<T> adj : src.neighbors()) {
+      below += numPathsBFS(adj, target);
+    }
+
+    src.unmark();
+    return below;
   }
 
   public void aocProblem12A(Node<String> src, String target, List<Node<String>> curPath, List<List<Node<String>>> allPaths) {
