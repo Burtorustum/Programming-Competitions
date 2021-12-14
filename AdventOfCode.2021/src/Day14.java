@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 public class Day14 extends AProblem {
 
   public Day14(String fileName) throws IOException {
-    super(fileName, "--- 14 ---");
+    super(fileName, "--- Day 14: Extended Polymerization ---\n");
   }
 
   @Override
@@ -43,40 +41,33 @@ public class Day14 extends AProblem {
     List<String> template = getTemplatePairs(lines.get(0));
     Map<String, String> rules = genRules();
 
-    Set<String> uniqueChars = new HashSet<>(template.stream().map(s -> s.substring(0,1)).toList());
-    uniqueChars.add(template.get(template.size()-1).substring(1));
-    rules.forEach((key, value) -> uniqueChars.add(value.substring(1)));
-    Map<String, BigInteger> pairCounts = allPairs(uniqueChars);
-
-    Map<String, BigInteger> numChar = new HashMap<>();
-    for (String s : uniqueChars) {
-      int num = 0;
-      for (char c : lines.get(0).toCharArray()) {
-        if (s.charAt(0) == c) {
-          num++;
-        }
+    Map<String, BigInteger> pairCounts = new HashMap<>();
+    rules.forEach((key, value) -> pairCounts.put(key, BigInteger.ZERO));
+    for (String p : template) {
+      if (pairCounts.containsKey(p)) {
+        pairCounts.put(p, pairCounts.get(p).add(BigInteger.ONE));
       }
-      numChar.put(s, new BigInteger(num + ""));
     }
 
-    for (String p : template) {
-      pairCounts.put(p, pairCounts.get(p).add(BigInteger.ONE));
+    Map<String, BigInteger> numChar = new HashMap<>();
+    rules.forEach((key, value) -> numChar.put(value.substring(1), BigInteger.ZERO));
+    for (char c : lines.get(0).toCharArray()) {
+      numChar.put(c+"", numChar.containsKey(c+"") ? BigInteger.ONE.add(numChar.get(c+"")) : BigInteger.ONE);
     }
 
     for (int i = 0; i < 40; i++) {
 
       Map<String, BigInteger> valChanges = new HashMap<>();
       for (String pair : pairCounts.keySet()) {
-        if (pairCounts.get(pair).compareTo(BigInteger.ZERO) > 0) {
-          String[] addPairs = applyRule(pair, rules);
-
-          valChanges.put(addPairs[0], pairCounts.get(pair).add(valChanges.getOrDefault(addPairs[0], BigInteger.ZERO)));
-          valChanges.put(addPairs[1], pairCounts.get(pair).add(valChanges.getOrDefault(addPairs[1], BigInteger.ZERO)));
-          valChanges.put(pair, pairCounts.get(pair).multiply(new BigInteger("-1")).add(valChanges.getOrDefault(pair, BigInteger.ZERO)));
-
-          if (rules.containsKey(pair)) {
-            numChar.put(rules.get(pair).substring(1), numChar.get((rules.get(pair).substring(1))).add(pairCounts.get(pair)));
+        if (pairCounts.containsKey(pair) && pairCounts.get(pair).compareTo(BigInteger.ZERO) > 0) {
+          for (String out : applyRule(pair, rules)) {
+            valChanges.put(out, pairCounts.get(pair).add(valChanges.getOrDefault(out, BigInteger.ZERO)));
           }
+          valChanges.put(pair, pairCounts.get(pair).multiply(BigInteger.valueOf(-1)).add(valChanges.getOrDefault(pair, BigInteger.ZERO)));
+
+          numChar.put(
+              rules.get(pair).substring(1),
+              numChar.get((rules.get(pair).substring(1))).add(pairCounts.get(pair)));
         }
       }
 
@@ -127,13 +118,4 @@ public class Day14 extends AProblem {
     return temp;
   }
 
-  Map<String, BigInteger> allPairs(Set<String> uniques) {
-    Map<String, BigInteger> allPairs = new HashMap<>();
-    for (String s1 : uniques) {
-      for (String s2 : uniques) {
-        allPairs.put(s1+s2, BigInteger.ZERO);
-      }
-    }
-    return allPairs;
-  }
 }
