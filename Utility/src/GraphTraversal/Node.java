@@ -82,6 +82,10 @@ public class Node<T> {
     other.connect(this);
   }
 
+  public int getEdgeWith(Node<T> neighbor) {
+    return this.edgeList.stream().filter(e -> e.getOther(this).equals(neighbor)).toList().get(0).weight();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this) {

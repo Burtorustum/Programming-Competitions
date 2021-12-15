@@ -202,8 +202,8 @@ public class Graph<T> {
     }
     List<Node<T>> path = new ArrayList<>();
 
-    System.out.println("SOURCE: " + source);
-    System.out.println("TARGET: " + target);
+    //System.out.println("SOURCE: " + source);
+    //System.out.println("TARGET: " + target);
 
     while (target != null) {
       path.add(target);
@@ -211,7 +211,7 @@ public class Graph<T> {
     }
 
 
-    System.out.println("PATH: " + path);
+    //System.out.println("PATH: " + path.stream().map(Node::getData).toList());
     return path;
   }
 
