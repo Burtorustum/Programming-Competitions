@@ -123,7 +123,6 @@ public class Day16 extends AProblem {
     int typeID = Integer.parseInt(type, 2);
 
     // literal packet -------------------
-
     if (typeID == 4) {
       StringBuilder literal = new StringBuilder();
       boolean running = true;
@@ -161,6 +160,7 @@ public class Day16 extends AProblem {
       while (sub.size() != 0) {
         results.add(decode(sub, false));
       }
+
     } else {
 
       // next 11 bits = number of subpackets
@@ -175,8 +175,7 @@ public class Day16 extends AProblem {
       }
     }
 
-
-    BigInteger overall = switch (typeID) {
+    return switch (typeID) {
       case 0 -> results.stream().reduce(BigInteger::add).get();
       case 1 -> results.stream().reduce(BigInteger::multiply).get();
       case 2 -> results.stream().min(BigInteger::compareTo).get();
@@ -186,7 +185,5 @@ public class Day16 extends AProblem {
       case 7 -> results.get(0).equals(results.get(1)) ? BigInteger.ONE : BigInteger.ZERO;
       default -> new BigInteger("-2");
     };
-
-    return overall;
   }
 }
