@@ -38,6 +38,17 @@ public class ArrayPos {
     return adj;
   }
 
+  public List<ArrayPos> getAdjacent(int numRows, int numCols, boolean left, boolean right, boolean up, boolean down) {
+    List<ArrayPos> adj = new ArrayList<>();
+
+    if (left) adj.add(getLeft());
+    if (right) adj.add(getRight(numCols));
+    if (down) adj.add(getDown(numRows));
+    if (up) adj.add(getUp());
+
+    return adj.stream().filter(Objects::nonNull).toList();
+  }
+
   public <T> List<T> getAdjacent(List<List<T>> grid, boolean includeDiagonals, boolean includeCur) {
     List<ArrayPos> adj = new ArrayList<>();
     int numRows = grid.size();
