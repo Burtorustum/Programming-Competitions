@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Day16 extends AProblem {
@@ -64,26 +63,18 @@ public class Day16 extends AProblem {
     int typeID = Integer.parseInt(type, 2);
 
     // literal packet -------------------
-
     if (typeID == 4) {
-      StringBuilder literal = new StringBuilder();
-      boolean running = true;
 
+      boolean running = true;
       while (running) {
         List<Character> section = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
           section.add(encoded.remove(0));
         }
-
         if (section.remove(0) == '0') {
           running = false;
         }
-        for (char c : section) {
-          literal.append(c);
-        }
       }
-
-      //int literalVal = Integer.parseInt(literal.toString(), 2);
       return sum;
     }
 
@@ -97,12 +88,14 @@ public class Day16 extends AProblem {
       for (int i = 0; i < 15; i++) {
         lengthStr.append(encoded.remove(0));
       }
+
       int bitLength = Integer.parseInt(lengthStr.toString(), 2);
       List<Character> sub = encoded.subList(0, bitLength);
-      int i = 0;
+
       while (sub.size() != 0) {
         sum += decodeVersionSum(sub, false);
       }
+
       return sum;
     }
 
