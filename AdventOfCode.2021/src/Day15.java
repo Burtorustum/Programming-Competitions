@@ -24,8 +24,17 @@ public class Day15 extends AProblem {
 
   @Override
   String solvePartTwo() {
+    long initialTime = System.currentTimeMillis();
+
     Graph<ArrayPos> graph = genGridB(lines.size(), lines.get(0).length());
+
+    System.out.println("Gen TIME: " + (System.currentTimeMillis() - initialTime));
+    initialTime = System.currentTimeMillis();
+
     List<Node<ArrayPos>> path = graph.minPath(graph.nodes.get(0), graph.nodes.get(graph.nodes.size()-1));
+
+    System.out.println("Dijkstra TIME: " + (System.currentTimeMillis() - initialTime));
+
 
     int sum = 0;
     for (int i = path.size()-1; i > 0; i--) {
