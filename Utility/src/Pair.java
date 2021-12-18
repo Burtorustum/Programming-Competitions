@@ -6,7 +6,6 @@ public record Pair<T, U> (T one, U two) {
     return item.equals(one) || item.equals(two);
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -26,6 +25,6 @@ public record Pair<T, U> (T one, U two) {
 
   @Override
   public String toString() {
-    return "Pair{" + one + "," + two + '}';
+    return "[" + one + "," + two + ']';
   }
 }
