@@ -1,5 +1,4 @@
 from helper import getData
-
 input = getData(1)
 
 maxsum = []
