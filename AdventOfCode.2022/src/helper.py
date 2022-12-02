@@ -6,4 +6,12 @@ def getData(dayNum):
     src_path = (mod_path / relative_path).resolve()
 
     file = open(src_path, "r")
-    return file.read().splitlines()
+    return file.read()
+
+def getTestData(dayNum):
+    mod_path = Path(__file__).parent
+    relative_path = '../data/day' + str(dayNum) + 'test.txt'
+    src_path = (mod_path / relative_path).resolve()
+
+    file = open(src_path, "r")
+    return file.read()

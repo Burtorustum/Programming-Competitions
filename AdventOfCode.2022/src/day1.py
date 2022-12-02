@@ -1,5 +1,5 @@
 from helper import getData
-input = getData(1)
+input = getData(1).splitlines()
 
 maxsum = []
 sum = 0
