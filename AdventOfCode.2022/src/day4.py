@@ -1,16 +1,14 @@
+import re
 from helper import *
 input = getData(4).splitlines()
 
+input = [list(map(int, re.split(',|-', x))) for x in input]
 c1, c2 = 0, 0
 for line in input:
-    line = line.split(',')    
-    range1 = list(map(int, line[0].split('-')))
-    range2 = list(map(int, line[1].split('-')))
-    
-    if (range1[0] <= range2[0] and range1[1] >= range2[1]) or (range2[0] <= range1[0] and range2[1] >= range1[1]):
+    if (line[0] <= line[2] and line[1] >= line[3]) or (line[2] <= line[0] and line[3] >= line[1]):
         c1 += 1
         c2 += 1
-    elif (range1[0] >= range2[0] and range1[0] <= range2[1]) or (range1[1] >= range2[0] and range1[1] <= range2[1]):
+    elif (line[0] >= line[2] and line[0] <= line[3]) or (line[1] >= line[2] and line[1] <= line[3]):
         c2 += 1
 
 print("pt1: ", c1)
