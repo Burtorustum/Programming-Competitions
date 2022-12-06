@@ -1,9 +1,11 @@
 def main():
-    grid = [[0 for x in range(2)] for i in range(2)]
+    n = 2
+    grid = [[x for x in range(n+1)] for i in range(n+1)]
     print(grid)
+    print(pathfind(grid))
 
 def pathfind(grid):
-    running = True
+    count = 0
     #while running:
 
 
