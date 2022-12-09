@@ -1,12 +1,10 @@
 from helper import *
 
-
 def move_t(h, t):
     x_diff = h[0] - t[0]
     y_diff = h[1] - t[1]
+
     return abs(x_diff) > 1 or abs(y_diff) > 1
-
-
 def new_pos(h, t):
     if not move_t(h, t):
         return t
@@ -27,12 +25,10 @@ def new_pos(h, t):
     else:
         return [t[0] - 1, t[1] - 1]
 
-
 data = getData(9).splitlines()
-# data = getTestData(9).splitlines()
+#data = getTestData(9).splitlines()
 
-rope = [[0, 0], [0, 0]]
-# rope = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+rope = [[0, 0]] * 10
 tail_pos = []
 
 for line in data:
@@ -51,14 +47,9 @@ for line in data:
             rope[-1][1] -= 1
 
         for s in range(len(rope) - 2, -1, -1):
-            rope[s] = new_pos(rope[s + 1], rope[s])
+            rope[s] = new_pos(rope[s+1], rope[s]).copy()
 
-        tail_pos.append(rope[0])
+        if tail_pos.count((rope[0][0], rope[0][1])) == 0:
+            tail_pos.append((rope[0][0], rope[0][1]))
 
-unique = []
-for p in tail_pos:
-    if unique.count((p[0], p[1])) == 0:
-        unique.append((p[0], p[1]))
-
-print(unique)
-print(len(unique))
+print(len(tail_pos))
